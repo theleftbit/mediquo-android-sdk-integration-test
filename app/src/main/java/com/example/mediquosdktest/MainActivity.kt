@@ -48,6 +48,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        if (FirebaseApp.getApps(this).isEmpty()) {
+            FirebaseApp.initializeApp(this)
+        }
+
         val composeView: ComposeView = findViewById(R.id.compose_view)
 
         // Set the content for the ComposeView

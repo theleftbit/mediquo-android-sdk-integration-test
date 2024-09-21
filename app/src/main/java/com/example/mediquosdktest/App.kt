@@ -26,6 +26,9 @@ class App: Application(){
 
     override fun onCreate() {
         super.onCreate()
+        if (FirebaseApp.getApps(this).isEmpty()) {
+            FirebaseApp.initializeApp(this)
+        }
         MediquoSDK.initialize(this, getString(R.string.api_key), mediQuoInitListener)
     }
 }
