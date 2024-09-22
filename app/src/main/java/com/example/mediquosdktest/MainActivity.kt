@@ -10,7 +10,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
-import androidx.fragment.app.Fragment
 import com.example.mediquosdktest.App.Companion.TAG
 import com.example.mediquosdktest.ui.LoginButton
 import com.example.mediquosdktest.ui.NavigateButton
@@ -18,8 +17,6 @@ import com.google.firebase.FirebaseApp
 import com.mediquo.chat.MediquoAuthenticateListener
 import com.mediquo.chat.MediquoDeAuthenticateListener
 import com.mediquo.chat.MediquoSDK
-import com.mediquo.chat.presentation.features.professionals.ProfessionalListFragment
-import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
     private val mediquoSDK: MediquoSDK by lazy { MediquoSDK.getInstance() }
@@ -61,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                 LoginButton(
                     isLogged = loggedIn.value,
                     onClick = {
-                        if(MediquoSDK.getInstance().isAuthenticated != true){
+                        if(FirebaseApp.getApps(this@MainActivity).isEmpty() == false && MediquoSDK.getInstance().isAuthenticated != true){
                             MediquoSDK.authenticateWithToken(getString(R.string.access_token))
                             Toast.makeText(this@MainActivity, "Logged in", Toast.LENGTH_SHORT).show()
                             loggedIn.value = true
